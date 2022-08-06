@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";	
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { PROFILE_SCREEN } from "../constants";	
+import { PROFILE_SCREEN } from "../constants";
 
 // TODO: Change to your user name	
 const API = "https://pcmob5-blog-api.chiawee.repl.co";	

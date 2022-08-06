@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOGIN_SCREEN } from "../constants";
 import axios from "axios";
-import { set } from "react-native-reanimated";
 
 // TODO: Change to your user name	
 const API = "https://pcmob5-blog-api.chiawee.repl.co";	
@@ -47,7 +46,7 @@ export default function ProfileScreen() {
         onPress={() => {
           navigation.navigate(LOGIN_SCREEN);
           AsyncStorage.removeItem("token");
-          setUsername("loading...");
+          setUsername("loading...")
         }}
       >
         <Text style={styles.buttonText}>Logout</Text>
