@@ -1,0 +1,2 @@
+export const LOGIN_SCREEN = "LOGIN_SCREEN";
+export const PROFILE_SCREEN = "PROFILE_SCREEN";
