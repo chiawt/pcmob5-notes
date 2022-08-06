@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Keyboard,
   StyleSheet,
   Text,
@@ -20,9 +21,11 @@ export default function LoginScreen() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-  const [errorText, setErrorText] = useState("");	
+  const [errorText, setErrorText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function login() {	
+    setLoading(true)
     Keyboard.dismiss();	
     try {	
       const response = await axios.post(API + API_LOGIN, {	
@@ -30,11 +33,15 @@ export default function LoginScreen() {
         password,	
       });	
       await AsyncStorage.setItem("token", response.data.access_token);	
+      setErrorText("")
+      setLoading(false)
       navigation.navigate(PROFILE_SCREEN);	
-    } catch (error) {	
+    } catch (error) {
+      setLoading(false)
       console.log(error.response);	
       setErrorText(error.response.data.description);	
-    }	
+    }
+    setLoading(false)
   }
 
   return (
@@ -59,8 +66,13 @@ export default function LoginScreen() {
       <TouchableOpacity style={styles.button} onPress={async () => {
         await login();
       }}>
-        <Text style={styles.buttonText}>Login</Text>
+        {loading ? (
+            <ActivityIndicator style={styles.buttonText} />
+        ) : (
+            <Text style={styles.buttonText}>Login</Text>
+        )}
       </TouchableOpacity>
+      
       <Text style={styles.errorText}>{errorText}</Text>
     </View>
   );
