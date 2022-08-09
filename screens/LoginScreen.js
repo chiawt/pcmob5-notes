@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";	
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { PROFILE_SCREEN } from "../constants";
+import { PROFILE_SCREEN, SIGNUP_SCREEN } from "../constants";
 
 // TODO: Change to your user name	
 const API = "https://pcmob5-blog-api.chiawee.repl.co";	
@@ -74,6 +74,13 @@ export default function LoginScreen() {
       </TouchableOpacity>
       
       <Text style={styles.errorText}>{errorText}</Text>
+
+      <TouchableOpacity>
+        <Text style={styles.signupText} onPress={() =>  {
+          navigation.navigate(SIGNUP_SCREEN);
+        }}>
+          No account? Sign Up now.</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -81,9 +88,14 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   errorText: {
-    marginTop: 20,
+    marginTop: 15,
     fontSize: 15,
     color: "red"
+    },
+  signupText: {
+    marginTop: 10,
+    fontSize: 15,
+    color: "grey"
     },
   container: {
     flex: 1,

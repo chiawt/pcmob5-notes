@@ -3,9 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
-import { LOGIN_SCREEN, PROFILE_SCREEN } from "./constants";
+import { LOGIN_SCREEN, PROFILE_SCREEN, SIGNUP_SCREEN } from "./constants";
 import LoginScreen  from "./screens/LoginScreen";
 import ProfileScreen  from "./screens/ProfileScreen";
+import SignUpScreen  from "./screens/SignUpScreen";
 import 'react-native-gesture-handler';
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
       <ActivityIndicator />
     </View>
   );
+
   const AppScreen = () => (
     <NavigationContainer>
       <StatusBar />
@@ -41,6 +43,7 @@ export default function App() {
       >
         <Stack.Screen component={LoginScreen} name={LOGIN_SCREEN} />
         <Stack.Screen component={ProfileScreen} name={PROFILE_SCREEN} />
+        <Stack.Screen component={SignUpScreen} name={SIGNUP_SCREEN} />
       </Stack.Navigator>
     </NavigationContainer>
   );
