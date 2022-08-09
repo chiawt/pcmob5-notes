@@ -46,8 +46,7 @@ import {
             }
         }   
         else {
-            console.log("kkkkkk")
-            setErrorText("Password mismatch")
+            setErrorText("Confirm password again!")
         }
       setLoading(false)
     }
