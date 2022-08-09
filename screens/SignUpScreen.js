@@ -15,32 +15,40 @@ import {
   
   // TODO: Change to your user name	
   const API = "https://pcmob5-blog-api.chiawee.repl.co";	
-  const API_LOGIN = "/auth";
+  const API_REGISTER = "/newuser";
   
   export default function SIGNUPScreen() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPW, setConfirmPW] = useState("");
     const navigation = useNavigation();
     const [errorText, setErrorText] = useState("");
     const [loading, setLoading] = useState(false);
   
-    async function login() {	
+    async function signup() {	
       setLoading(true)
       Keyboard.dismiss();	
-      try {	
-        const response = await axios.post(API + API_LOGIN, {	
-          username,	
-          password,	
-        });	
-        await AsyncStorage.setItem("token", response.data.access_token);	
-        setErrorText("")
-        setLoading(false)
-        navigation.navigate(PROFILE_SCREEN);	
-      } catch (error) {
-        setLoading(false)
-        console.log(error.response);	
-        setErrorText(error.response.data.description);	
-      }
+      console.log(password)
+      console.log(confirmPW)
+        if (password == confirmPW) {
+            try {	
+                const response = await axios.post(API + API_REGISTER, {	
+                username,	
+                password,	
+                });	
+                console.log(response.data.Success);	
+                setErrorText(response.data.Success)
+                // setLoading(false)
+            } catch (error) {
+                setLoading(false)
+                console.log(error.response);	
+                setErrorText(error.response.data.description);	
+            }
+        }   
+        else {
+            console.log("kkkkkk")
+            setErrorText("Password mismatch")
+        }
       setLoading(false)
     }
   
@@ -67,12 +75,12 @@ import {
           style={styles.inputView}
           placeholder="Password Confirm"
           secureTextEntry={true}
-          value={password}
-        //   onChangeText={(pw) => setPassword(pw)}
+          value={confirmPW}
+          onChangeText={(confirmpw) => setConfirmPW(confirmpw)}
         />
 
         <TouchableOpacity style={styles.button} onPress={async () => {
-          await login();
+          await signup();
         }}>
           {loading ? (
               <ActivityIndicator style={styles.buttonText} />
